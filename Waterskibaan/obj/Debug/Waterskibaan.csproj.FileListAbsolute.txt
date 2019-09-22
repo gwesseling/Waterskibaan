@@ -1,0 +1,7 @@
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\bin\Debug\Waterskibaan.exe.config
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\bin\Debug\Waterskibaan.exe
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\bin\Debug\Waterskibaan.pdb
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\obj\Debug\Waterskibaan.csprojAssemblyReference.cache
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\obj\Debug\Waterskibaan.csproj.CoreCompileInputs.cache
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\obj\Debug\Waterskibaan.exe
+C:\Users\Gerard\source\repos\Waterskibaan\Waterskibaan\obj\Debug\Waterskibaan.pdb
