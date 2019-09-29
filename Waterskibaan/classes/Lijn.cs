@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace Waterskibaan.classes {
     class Lijn {
         public int PositieOpDeKabel { get; set; } = 0;
+        public Sporter Sporter { get; set; }
     }
 }

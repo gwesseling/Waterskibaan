@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Waterskibaan.classes;
 
 namespace Waterskibaan {
     class Program {
         static void Main(string[] args) {
-            TestOpdracht3();
+            TestOpdracht8();
         }
 
         private static void TestOpdracht2() {
@@ -53,6 +49,14 @@ namespace Waterskibaan {
             Console.WriteLine("Lijn: " + lv.VerwijderdEersteLijn().PositieOpDeKabel);
 
             Console.WriteLine(lv.ToString());
+        }
+
+        private static void TestOpdracht8() {
+            Waterskibaan.classes.Waterskibaan ws = new Waterskibaan.classes.Waterskibaan();
+
+            Sporter s = new Sporter(MoveCollection.GetWillekeurigeMoves());
+
+            ws.SporterStart(s);
         }
     }
 }

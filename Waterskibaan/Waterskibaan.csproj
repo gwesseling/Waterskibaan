@@ -47,8 +47,13 @@
     <Compile Include="classes\Kabel.cs" />
     <Compile Include="classes\Lijn.cs" />
     <Compile Include="classes\LijnenVoorraad.cs" />
+    <Compile Include="classes\MoveCollection.cs" />
+    <Compile Include="classes\moves\Flip.cs" />
+    <Compile Include="classes\moves\Jump.cs" />
+    <Compile Include="classes\moves\Roll.cs" />
     <Compile Include="classes\Skies.cs" />
     <Compile Include="classes\Sporter.cs" />
+    <Compile Include="classes\Waterskibaan.cs" />
     <Compile Include="classes\Zwemvest.cs" />
     <Compile Include="interfaces\IMoves.cs" />
     <Compile Include="Program.cs" />
