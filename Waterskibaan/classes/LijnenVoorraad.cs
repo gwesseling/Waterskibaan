@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Waterskibaan.classes {
     class LijnenVoorraad {
-        private Queue<Lijn> _lijnen = new Queue<Lijn>();
+        private Queue<Lijn> _lijnen;
+
+        public LijnenVoorraad() {
+            this._lijnen = new Queue<Lijn>();
+        }
 
         public void LijnToevoegenAanRij(Lijn lijn) {
             this._lijnen.Enqueue(lijn);

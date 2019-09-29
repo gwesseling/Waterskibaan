@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Waterskibaan.classes {
     class Kabel {
-        private LinkedList<Lijn> _lijnen { get; set; } = new LinkedList<Lijn>();
+        private LinkedList<Lijn> _lijnen { get; set; }
+
+        public Kabel() {
+            this._lijnen = new LinkedList<Lijn>();
+        }
 
         public bool IsStartPositieLeeg() {
             return this._lijnen.Count == 0 || this._lijnen.First.Value.PositieOpDeKabel != 0;

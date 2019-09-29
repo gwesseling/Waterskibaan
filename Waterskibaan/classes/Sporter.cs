@@ -13,6 +13,7 @@ namespace Waterskibaan.classes {
         public Skies Skies { get; set; }
         public Color KledingKleur { get; set; }
         public List<IMoves> Moves { get; set; }
+        public int behaaldePunten = 0;
 
         public Sporter(List<IMoves> moves) {
             this.Moves = moves;

@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Waterskibaan.interfaces {
     interface IMoves {
-        int move();
+        int Move();
     }
 }

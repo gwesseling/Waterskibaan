@@ -11,7 +11,6 @@ namespace Waterskibaan {
             TestOpdracht3();
         }
 
-        // TODO: add unit testing.
         private static void TestOpdracht2() {
             Kabel k = new Kabel();
 
