@@ -1,10 +1,11 @@
 ﻿using System;
 using Waterskibaan.classes;
+using Waterskibaan.classes.wachtrij;
 
 namespace Waterskibaan {
     class Program {
         static void Main(string[] args) {
-            TestOpdracht8();
+            TestOpdracht10();
         }
 
         private static void TestOpdracht2() {
@@ -57,6 +58,32 @@ namespace Waterskibaan {
             Sporter s = new Sporter(MoveCollection.GetWillekeurigeMoves());
 
             ws.SporterStart(s);
+        }
+
+        private static void TestOpdracht10() {
+            Sporter s1 = new Sporter(MoveCollection.GetWillekeurigeMoves());
+            Sporter s2 = new Sporter(MoveCollection.GetWillekeurigeMoves());
+
+            WachtrijInstructie ws = new WachtrijInstructie();
+
+            ws.SporterNeemPlaatsInRij(s1);
+            ws.SporterNeemPlaatsInRij(s2);
+
+            Console.WriteLine(ws);
+
+            foreach (Sporter s in ws.GetAllSporters()) {
+                Console.WriteLine(s);
+            }
+
+            ws.SportersVerlatenRij(1);
+
+            Console.WriteLine(ws);
+
+            ws.SportersVerlatenRij(5);
+
+            Console.WriteLine(ws);
+
+
         }
     }
 }
