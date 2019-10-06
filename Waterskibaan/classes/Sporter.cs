@@ -14,6 +14,7 @@ namespace Waterskibaan.classes {
         public Color KledingKleur { get; set; }
         public List<IMoves> Moves { get; set; }
         public int BehaaldePunten { get; set;  } = 0;
+        public IMoves HuidigeMove { get; set; }
 
         public Sporter(List<IMoves> moves) {
             Random random = new Random();

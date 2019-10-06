@@ -5,7 +5,7 @@ using Waterskibaan.classes.wachtrij;
 namespace Waterskibaan {
     class Program {
         static void Main(string[] args) {
-            TestOpdracht10();
+            TestOpdracht12();
         }
 
         private static void TestOpdracht2() {
@@ -84,6 +84,22 @@ namespace Waterskibaan {
             Console.WriteLine(ws);
 
 
+        }
+
+        private static void TestOpdracht11() {
+            Game game = new Game();
+            game.Initialize();
+            
+            // keeps the console running.
+            Console.ReadLine();
+        }
+
+        private static void TestOpdracht12() {
+            Game game = new Game();
+            game.Initialize();
+
+            // keeps the console running.
+            Console.ReadLine();
         }
     }
 }

@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 namespace Waterskibaan.classes {
     class Waterskibaan {
 
-        private LijnenVoorraad lv;
-        private Kabel kabel;
+        public LijnenVoorraad LijnenVoorraad { get; set; }
+        public Kabel Kabel { get; set; }
 
         public Waterskibaan() {
-            this.kabel = new Kabel();
-            this.lv = new LijnenVoorraad();
+            this.Kabel = new Kabel();
+            this.LijnenVoorraad = new LijnenVoorraad();
 
             for (int i = 0; i < 15; i++) {
-                this.lv.LijnToevoegenAanRij(new Lijn());
+                this.LijnenVoorraad.LijnToevoegenAanRij(new Lijn());
             }
         }
 
         public void VerplaatsKabel() {
-            this.kabel.VerschuifLijnen();
+            this.Kabel.VerschuifLijnen();
 
-            Lijn lijn = this.kabel.VerwijderLijnVanKabel();
+            Lijn lijn = this.Kabel.VerwijderLijnVanKabel();
 
             if (lijn != null) {
-                lv.LijnToevoegenAanRij(lijn);
+                LijnenVoorraad.LijnToevoegenAanRij(lijn);
             }
         }
 
@@ -34,16 +34,16 @@ namespace Waterskibaan.classes {
                 throw new Exception("Een sporter moet skies en een zwemvest hebben!");
             }
 
-            if (this.kabel.IsStartPositieLeeg()) {
-                Lijn lijn = this.lv.VerwijderdEersteLijn();        
+            if (this.Kabel.IsStartPositieLeeg()) {
+                Lijn lijn = this.LijnenVoorraad.VerwijderdEersteLijn();        
                 sp.AantalRondesNogTeGaan = new Random().Next(1, 3);
                 lijn.Sporter = sp;
-                this.kabel.NeemLijnInGebruik(lijn);
+                this.Kabel.NeemLijnInGebruik(lijn);
             }
         }
 
         public override string ToString() {
-            return $"{this.lv.ToString()}, Lijnen in gebruik: {this.kabel.ToString()}";
+            return $"{this.LijnenVoorraad}, Lijnen in gebruik: {this.Kabel}";
         }
 
     }

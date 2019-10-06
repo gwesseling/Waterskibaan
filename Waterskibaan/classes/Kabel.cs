@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes {
     class Kabel {
@@ -26,7 +27,16 @@ namespace Waterskibaan.classes {
             Lijn lijn = null;
 
             foreach (Lijn l in this._lijnen) {
-                l.PositieOpDeKabel = l.PositieOpDeKabel + 1;
+                Sporter sporter = l.Sporter;
+                if (sporter.Moves.Count > 0) {
+                    Random r = new Random();
+                    if (r.Next(0, 4) == 0) {
+                        IMoves m = sporter.Moves[r.Next(sporter.Moves.Count)];
+                        m.Move();
+                    }
+                }
+
+                l.PositieOpDeKabel = l.PositieOpDeKabel++;
 
                 if (l.PositieOpDeKabel > 9) {
                     l.Sporter.AantalRondesNogTeGaan--;

@@ -8,7 +8,7 @@ using Waterskibaan.interfaces;
 namespace Waterskibaan.classes {
     abstract class Wachtrij : IWachtrij {
 
-        public virtual int MAX_LENGTE_RIJ { get => 0; }
+        public virtual int MAX_LENGTE_RIJ { get => 5; }
         private Queue<Sporter> wachtrij;
 
         public Wachtrij() {
@@ -16,7 +16,7 @@ namespace Waterskibaan.classes {
         }
 
         public void SporterNeemPlaatsInRij(Sporter sporter) {
-            if (this.wachtrij.Count < 5) {
+            if (this.wachtrij.Count < this.MAX_LENGTE_RIJ) {
                 this.wachtrij.Enqueue(sporter);
             }
         }
@@ -27,18 +27,19 @@ namespace Waterskibaan.classes {
         }
 
         public List<Sporter> SportersVerlatenRij(int aantal) {
+            List<Sporter> sporters = new List<Sporter>();
 
             for (int i = 0; i < aantal; i++) {
                 if (this.wachtrij.Count > 0) {
-                    this.wachtrij.Dequeue();
+                    sporters.Add(this.wachtrij.Dequeue());
                 }
             }
 
-            return this.GetAllSporters();
+            return sporters;
         }
 
         public override string ToString() {
-            return $"Er staan {this.wachtrij.Count} sporters in de wachtrij.";
+            return $"{this.wachtrij.Count} sporter(s) in de wachtrij.";
         }
     }
 }
