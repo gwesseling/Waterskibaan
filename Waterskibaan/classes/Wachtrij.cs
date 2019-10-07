@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes {
-    abstract class Wachtrij : IWachtrij {
+    public  class Wachtrij : IWachtrij {
 
         public virtual int MAX_LENGTE_RIJ { get => 5; }
         private Queue<Sporter> wachtrij;

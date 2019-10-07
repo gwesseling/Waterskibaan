@@ -8,16 +8,16 @@ using Waterskibaan.classes.args;
 using Waterskibaan.classes.wachtrij;
 
 namespace Waterskibaan.classes {
-    class Game {
+    public class Game {
 
         private Timer timer;
         private int counter;
 
-        private WachtrijInstructie wachtrijInstructie;
-        private InstructieGroep instructieGroep;
-        private WachtrijStarten wachtrijStarten;
+        public WachtrijInstructie WachtrijInstructie { get; set; }
+        public InstructieGroep InstructieGroep { get; set; }
+        public WachtrijStarten WachtrijStarten { get; set; }
 
-        private Waterskibaan ws;
+        public Waterskibaan Waterskibaan { get; set; }
 
         public delegate void NieuwBezoekerHandler(NieuweBezoekerArgs args);
         public event NieuwBezoekerHandler NieuweBezoeker;
@@ -26,21 +26,21 @@ namespace Waterskibaan.classes {
         public event InstructieAfgelopenHandler InstructieAfgelopen;
 
         public Game() {
-            this.ws = new Waterskibaan();
-            this.wachtrijInstructie = new WachtrijInstructie();
-            this.instructieGroep = new InstructieGroep();
-            this.wachtrijStarten = new WachtrijStarten();
+            this.Waterskibaan = new Waterskibaan();
+            this.WachtrijInstructie = new WachtrijInstructie();
+            this.InstructieGroep = new InstructieGroep();
+            this.WachtrijStarten = new WachtrijStarten();
         }
 
         public void Initialize() {
             this.SetupTimer();
 
-            this.NieuweBezoeker += this.wachtrijInstructie.OnNieuwBezoeker;
-            this.InstructieAfgelopen += this.instructieGroep.OnInstructieAfgelopen;
-            this.InstructieAfgelopen += this.wachtrijStarten.OnInstructieAfgelopen;
+            this.NieuweBezoeker += this.WachtrijInstructie.OnNieuwBezoeker;
+            this.InstructieAfgelopen += this.InstructieGroep.OnInstructieAfgelopen;
+            this.InstructieAfgelopen += this.WachtrijStarten.OnInstructieAfgelopen;
         }
 
-        public void SetupTimer() {
+        private void SetupTimer() {
             this.timer = new Timer(1000);
 
             this.timer.Elapsed += this.OnTimedEvent;
@@ -52,11 +52,11 @@ namespace Waterskibaan.classes {
             this.timer.Enabled = true;
         }
 
-        public void OnTimedEvent(Object source, ElapsedEventArgs e) {
+        private void OnTimedEvent(Object source, ElapsedEventArgs e) {
             this.counter++;
         }
 
-        public void OnNieweBezoeker(Object source, ElapsedEventArgs e) {
+        private void OnNieweBezoeker(Object source, ElapsedEventArgs e) {
             if (this.counter % 3 == 0) {
                 NieuweBezoekerArgs args = new NieuweBezoekerArgs() {
                     Sporter = new Sporter(MoveCollection.GetWillekeurigeMoves())
@@ -66,27 +66,27 @@ namespace Waterskibaan.classes {
             }
         }
 
-        public void OnInstructieAfgelopen(Object source, ElapsedEventArgs e) {
+        private void OnInstructieAfgelopen(Object source, ElapsedEventArgs e) {
             if (this.counter % 20 == 0) {
                 InstructieAfgelopenArgs args = new InstructieAfgelopenArgs() {
-                    SportersKlaar = this.instructieGroep.SportersVerlatenRij(5),
-                    NieuweSporters = this.wachtrijInstructie.SportersVerlatenRij(5)
+                    SportersKlaar = this.InstructieGroep.SportersVerlatenRij(5),
+                    NieuweSporters = this.WachtrijInstructie.SportersVerlatenRij(5)
                 };
 
                 this.InstructieAfgelopen(args);
             }
         }
 
-        public void OnVeplaatsKabel(Object source, ElapsedEventArgs e) {
+        private void OnVeplaatsKabel(Object source, ElapsedEventArgs e) {
             if (this.counter % 4 == 0) {
-                this.ws.VerplaatsKabel();
+                this.Waterskibaan.VerplaatsKabel();
 
-                if (this.ws.Kabel.IsStartPositieLeeg() && this.wachtrijStarten.GetAllSporters().Count > 0) {
-                    Sporter sporter = this.wachtrijStarten.SportersVerlatenRij(1).First();
+                if (this.Waterskibaan.Kabel.IsStartPositieLeeg() && this.WachtrijStarten.GetAllSporters().Count > 0) {
+                    Sporter sporter = this.WachtrijStarten.SportersVerlatenRij(1).First();
                     sporter.Skies = new Skies();
                     sporter.Zwemvest = new Zwemvest();
 
-                    this.ws.SporterStart(sporter);
+                    this.Waterskibaan.SporterStart(sporter);
                 }
             }
         }

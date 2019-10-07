@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes {
-    class Sporter {
+    public class Sporter {
         public int AantalRondesNogTeGaan { get; set; } = 0;
         public Zwemvest Zwemvest { get; set; }
         public Skies Skies { get; set; }

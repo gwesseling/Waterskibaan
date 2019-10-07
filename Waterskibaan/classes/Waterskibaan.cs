@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Waterskibaan.classes {
-    class Waterskibaan {
+    public class Waterskibaan {
 
         public LijnenVoorraad LijnenVoorraad { get; set; }
         public Kabel Kabel { get; set; }

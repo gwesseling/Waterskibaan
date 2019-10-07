@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Waterskibaan.classes.args;
 
 namespace Waterskibaan.classes.wachtrij {
-    class InstructieGroep : Wachtrij {
+    public class InstructieGroep : Wachtrij {
 
         public override int MAX_LENGTE_RIJ { get => 5; }
 

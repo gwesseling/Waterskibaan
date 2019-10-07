@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Waterskibaan.classes {
-    class LijnenVoorraad {
+    public class LijnenVoorraad {
         private Queue<Lijn> _lijnen;
 
         public LijnenVoorraad() {

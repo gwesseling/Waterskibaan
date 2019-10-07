@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Waterskibaan.classes.args {
-    class InstructieAfgelopenArgs {
+    public class InstructieAfgelopenArgs {
         public List<Sporter> NieuweSporters { get; set; }
         public List<Sporter> SportersKlaar { get; set; }
     }

@@ -7,7 +7,7 @@ using Waterskibaan.classes.args;
 using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes.wachtrij {
-    class WachtrijStarten : Wachtrij {
+    public class WachtrijStarten : Wachtrij {
 
         public override int MAX_LENGTE_RIJ { get => 20; }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Waterskibaan.interfaces {
-    interface IMoves {
+    public interface IMoves {
         int Move();
     }
 }
