@@ -29,15 +29,15 @@ namespace Waterskibaan.classes {
             }
         }
 
-        public void SporterStart(Sporter sp) {
-            if (sp.Skies == null || sp.Zwemvest == null) {
+        public void SporterStart(Sporter s) {
+            if (s.Skies == null || s.Zwemvest == null) {
                 throw new Exception("Een sporter moet skies en een zwemvest hebben!");
             }
 
             if (this.Kabel.IsStartPositieLeeg()) {
                 Lijn lijn = this.LijnenVoorraad.VerwijderdEersteLijn();        
-                sp.AantalRondesNogTeGaan = new Random().Next(1, 3);
-                lijn.Sporter = sp;
+                s.AantalRondesNogTeGaan = new Random().Next(1, 3);
+                lijn.Sporter = s;
                 this.Kabel.NeemLijnInGebruik(lijn);
             }
         }

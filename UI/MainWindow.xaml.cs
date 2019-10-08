@@ -24,15 +24,10 @@ namespace UI {
     public partial class MainWindow : Window {
 
         private Game game;
-        private DispatcherTimer timer;
 
-        private Dictionary<Sporter, Rectangle> sportersInWachtrij = new Dictionary<Sporter, Rectangle>();
-
-
-        private List<Sporter> prevInWachtrij = new List<Sporter>();
-
-        private int y = 370;
-        private int x = 315;
+        private List<Rectangle> sportersInWachtrij = new List<Rectangle>();
+        private List<Rectangle> sportersInInstructie = new List<Rectangle>();
+        private List<Rectangle> sportersInStart = new List<Rectangle>();
 
         public MainWindow() {
             InitializeComponent();
@@ -40,38 +35,68 @@ namespace UI {
             this.game = new Game();
             this.game.Initialize();
 
-            timer = new DispatcherTimer(DispatcherPriority.Normal);
-            timer.Interval = TimeSpan.FromMilliseconds(25);
-            timer.Tick += this.render;
-            timer.IsEnabled = true;
-
-           
+            this.game.NieuweBezoeker += RenderWachtrijInstructie;
+            this.game.InstructieAfgelopen += RenderInstructies;
+            this.game.Timer.Tick += RenderWachtrijStarten;   
         }
 
-        public void render(object sender, EventArgs e) {
+        public void RenderWachtrijInstructie(NieuweBezoekerArgs args) {
             List<Sporter> wachtrijInstructie = this.game.WachtrijInstructie.GetAllSporters();
 
-            if (!prevInWachtrij.Equals(wachtrijInstructie)) {
-                Console.WriteLine("Render");
+            clearSporters(this.sportersInWachtrij);
+            int y = 370;
+            int x = 315;
 
-                foreach (Sporter sporter in wachtrijInstructie) {
-                    if (!this.sportersInWachtrij.ContainsKey(sporter)) {
-                        Rectangle r = this.renderSporter(sporter, x, y);
-                        this.sportersInWachtrij.Add(sporter, r);
+            foreach (Sporter sporter in wachtrijInstructie) {
+                Rectangle r = this.renderSporter(sporter, x, y);
+                this.sportersInWachtrij.Add(r);
 
-                        y -= 30;
+                y -= 30;
 
-                        if (y < 40) {
-                            y = 370;
-                            x -= 30;
-                        }
-                    }
+                if (y < 70) {
+                    y = 370;
+                    x -= 30;
                 }
-
-                prevInWachtrij = wachtrijInstructie;
             }
+            
+        }
 
-  /*          foreach (Sporter sporter in this.game.wa)*/
+        public void RenderInstructies(InstructieAfgelopenArgs args) {
+            List<Sporter> instructie = args.NieuweSporters;
+
+            clearSporters(this.sportersInInstructie);
+            int y = 464;
+            int x = 224;
+
+            foreach (Sporter sporter in instructie) {
+                Rectangle r = this.renderSporter(sporter, x, y);
+                this.sportersInInstructie.Add(r);
+
+                x -= 30;
+            }  
+        }
+
+        public void RenderWachtrijStarten(Object source, EventArgs args) {      
+            List<Sporter> start = this.game.WachtrijStarten.GetAllSporters();
+
+            clearSporters(this.sportersInStart);
+            int y = 352;
+            int x = 495;
+
+            foreach (Sporter sporter in start) {
+                Rectangle r = this.renderSporter(sporter, x, y);
+                this.sportersInStart.Add(r);
+
+                y += 30;
+            }
+        }
+
+        public void clearSporters(List<Rectangle> rectangles) {
+            foreach (Rectangle r in rectangles) {
+                if (Canvas.Children.Contains(r)) {
+                    Canvas.Children.Remove(r);
+                }
+            }
         }
 
         public Rectangle renderSporter(Sporter sporter, int x, int y) {
@@ -79,6 +104,8 @@ namespace UI {
             r.Fill = new SolidColorBrush(Color.FromRgb(sporter.KledingKleur.R, sporter.KledingKleur.G, sporter.KledingKleur.B));
             r.Height = 25;
             r.Width = 25;
+            r.Stroke = new SolidColorBrush(Colors.Black);
+            r.StrokeThickness = 1;
 
             Canvas.SetLeft(r, x);
             Canvas.SetTop(r, y);

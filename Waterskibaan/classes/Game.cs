@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Threading;
 using Waterskibaan.classes.args;
 using Waterskibaan.classes.wachtrij;
 
 namespace Waterskibaan.classes {
     public class Game {
 
-        private Timer timer;
+        public DispatcherTimer Timer { get; set; }
         private int counter;
 
         public WachtrijInstructie WachtrijInstructie { get; set; }
@@ -41,22 +42,22 @@ namespace Waterskibaan.classes {
         }
 
         private void SetupTimer() {
-            this.timer = new Timer(1000);
+            this.Timer = new DispatcherTimer();
+            this.Timer.Interval = new TimeSpan(0,0, 1);
 
-            this.timer.Elapsed += this.OnTimedEvent;
-            this.timer.Elapsed += this.OnNieweBezoeker;
-            this.timer.Elapsed += this.OnInstructieAfgelopen;
-            this.timer.Elapsed += this.OnVeplaatsKabel;
+            this.Timer.Tick += this.OnTimedEvent;
+            this.Timer.Tick += this.OnNieweBezoeker;
+            this.Timer.Tick += this.OnInstructieAfgelopen;
+            this.Timer.Tick += this.OnVeplaatsKabel;
 
-            this.timer.AutoReset = true;
-            this.timer.Enabled = true;
+            this.Timer.IsEnabled = true;
         }
 
-        private void OnTimedEvent(Object source, ElapsedEventArgs e) {
+        private void OnTimedEvent(Object source, EventArgs e) {
             this.counter++;
         }
 
-        private void OnNieweBezoeker(Object source, ElapsedEventArgs e) {
+        private void OnNieweBezoeker(Object source, EventArgs e) {
             if (this.counter % 3 == 0) {
                 NieuweBezoekerArgs args = new NieuweBezoekerArgs() {
                     Sporter = new Sporter(MoveCollection.GetWillekeurigeMoves())
@@ -66,7 +67,7 @@ namespace Waterskibaan.classes {
             }
         }
 
-        private void OnInstructieAfgelopen(Object source, ElapsedEventArgs e) {
+        private void OnInstructieAfgelopen(Object source, EventArgs e) {
             if (this.counter % 20 == 0) {
                 InstructieAfgelopenArgs args = new InstructieAfgelopenArgs() {
                     SportersKlaar = this.InstructieGroep.SportersVerlatenRij(5),
@@ -77,7 +78,7 @@ namespace Waterskibaan.classes {
             }
         }
 
-        private void OnVeplaatsKabel(Object source, ElapsedEventArgs e) {
+        private void OnVeplaatsKabel(Object source, EventArgs e) {
             if (this.counter % 4 == 0) {
                 this.Waterskibaan.VerplaatsKabel();
 
@@ -88,6 +89,8 @@ namespace Waterskibaan.classes {
 
                     this.Waterskibaan.SporterStart(sporter);
                 }
+
+                Console.WriteLine("Kabel volgorde: " + this.Waterskibaan.Kabel);
             }
         }
     }

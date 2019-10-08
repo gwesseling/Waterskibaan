@@ -29,8 +29,6 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-
-            <Rectangle Fill="#8B4513" Height="25" Canvas.Left="315" Canvas.Top="370" Width="25"/>
         </Canvas>
     </Grid>
 </Window>
