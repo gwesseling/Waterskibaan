@@ -25,9 +25,36 @@ namespace UI {
 
         private Game game;
 
-        private List<Rectangle> sportersInWachtrij = new List<Rectangle>();
-        private List<Rectangle> sportersInInstructie = new List<Rectangle>();
-        private List<Rectangle> sportersInStart = new List<Rectangle>();
+        private int[,] locaties = {
+            { 640, 470 },
+            { 640, 224 }, 
+            { 640, 33 }, 
+            { 840, 33 }, 
+            { 1056, 33 }, 
+            { 1056, 224 }, 
+            { 1056, 470},
+            { 1056, 674},
+            { 840, 674},
+            { 640, 674},
+        };
+
+        private double[,] kabels = {
+            { 47.5, 0},
+            { 47.5, 0},
+            { 50, 55},
+            { 0, 53.5},
+            { -68, 48},
+            { -68, 0},
+            { -68, 0},
+            { -68, -56},
+            { 0, -56},
+            { 49, -58},
+        };
+
+        private List<UIElement> sportersInWachtrij = new List<UIElement>();
+        private List<UIElement> sportersInInstructie = new List<UIElement>();
+        private List<UIElement> sportersInStart = new List<UIElement>();
+        private List<UIElement> sportersOpBaan = new List<UIElement>();
 
         public MainWindow() {
             InitializeComponent();
@@ -37,7 +64,8 @@ namespace UI {
 
             this.game.NieuweBezoeker += RenderWachtrijInstructie;
             this.game.InstructieAfgelopen += RenderInstructies;
-            this.game.Timer.Tick += RenderWachtrijStarten;   
+            this.game.VeplaatsKabel += RenderWachtrijStarten;
+            this.game.VeplaatsKabel += RenderSportersOpBaan;
         }
 
         public void RenderWachtrijInstructie(NieuweBezoekerArgs args) {
@@ -53,7 +81,7 @@ namespace UI {
 
                 y -= 30;
 
-                if (y < 70) {
+                if (y <= 70) {
                     y = 370;
                     x -= 30;
                 }
@@ -76,7 +104,7 @@ namespace UI {
             }  
         }
 
-        public void RenderWachtrijStarten(Object source, EventArgs args) {      
+        public void RenderWachtrijStarten(VerplaatsKabelArgs args) {      
             List<Sporter> start = this.game.WachtrijStarten.GetAllSporters();
 
             clearSporters(this.sportersInStart);
@@ -91,12 +119,44 @@ namespace UI {
             }
         }
 
-        public void clearSporters(List<Rectangle> rectangles) {
-            foreach (Rectangle r in rectangles) {
+        public void RenderSportersOpBaan(VerplaatsKabelArgs args) {
+            clearSporters(this.sportersOpBaan);
+
+            foreach (Lijn lijn in args.Lijnen) {
+                Sporter s = lijn.Sporter;
+                int x = locaties[lijn.PositieOpDeKabel, 0];
+                int y = locaties[lijn.PositieOpDeKabel, 1];
+
+                Line l = this.renderLine(x, y, 0, kabels[lijn.PositieOpDeKabel, 0], 0, kabels[lijn.PositieOpDeKabel, 1]);
+                Rectangle r = this.renderSporter(s, x, y);
+
+                this.sportersOpBaan.Add(r);
+                this.sportersOpBaan.Add(l);
+            }
+        }
+
+        public void clearSporters(List<UIElement> rectangles) {
+            foreach (UIElement r in rectangles) {
                 if (Canvas.Children.Contains(r)) {
                     Canvas.Children.Remove(r);
                 }
             }
+        }
+
+        public Line renderLine(double x, double y, double x1, double x2, double y1, double y2) {
+            Line l = new Line();
+            l.Stroke = new SolidColorBrush(Colors.Black);
+            l.StrokeThickness = 1;
+            l.X1 = x1;
+            l.X2 = x2;
+            l.Y1 = y1;
+            l.Y2 = y2;
+
+            Canvas.SetLeft(l, x + 12.5);
+            Canvas.SetTop(l, y + 12.5);
+            Canvas.Children.Add(l);
+
+            return l;
         }
 
         public Rectangle renderSporter(Sporter sporter, int x, int y) {

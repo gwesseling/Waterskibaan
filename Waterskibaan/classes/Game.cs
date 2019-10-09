@@ -26,6 +26,9 @@ namespace Waterskibaan.classes {
         public delegate void InstructieAfgelopenHandler(InstructieAfgelopenArgs args);
         public event InstructieAfgelopenHandler InstructieAfgelopen;
 
+        public delegate void VeplaatsKabelHandler(VerplaatsKabelArgs args);
+        public event VeplaatsKabelHandler VeplaatsKabel;
+
         public Game() {
             this.Waterskibaan = new Waterskibaan();
             this.WachtrijInstructie = new WachtrijInstructie();
@@ -68,7 +71,7 @@ namespace Waterskibaan.classes {
         }
 
         private void OnInstructieAfgelopen(Object source, EventArgs e) {
-            if (this.counter % 20 == 0) {
+            if (this.counter % 20 == 0 && this.WachtrijStarten.GetAllSporters().Count == 0) {
                 InstructieAfgelopenArgs args = new InstructieAfgelopenArgs() {
                     SportersKlaar = this.InstructieGroep.SportersVerlatenRij(5),
                     NieuweSporters = this.WachtrijInstructie.SportersVerlatenRij(5)
@@ -80,6 +83,7 @@ namespace Waterskibaan.classes {
 
         private void OnVeplaatsKabel(Object source, EventArgs e) {
             if (this.counter % 4 == 0) {
+
                 this.Waterskibaan.VerplaatsKabel();
 
                 if (this.Waterskibaan.Kabel.IsStartPositieLeeg() && this.WachtrijStarten.GetAllSporters().Count > 0) {
@@ -90,6 +94,11 @@ namespace Waterskibaan.classes {
                     this.Waterskibaan.SporterStart(sporter);
                 }
 
+                VerplaatsKabelArgs args = new VerplaatsKabelArgs() {
+                    Lijnen = this.Waterskibaan.Kabel._lijnen.ToList()
+                };
+
+                this.VeplaatsKabel(args);
                 Console.WriteLine("Kabel volgorde: " + this.Waterskibaan.Kabel);
             }
         }

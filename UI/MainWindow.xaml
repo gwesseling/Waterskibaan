@@ -8,6 +8,7 @@
         Title="MainWindow" Height="768" Width="1366">
     <Grid>
         <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="737" VerticalAlignment="Top" Width="997">
+            <!-- Wachtrijen -->
             <Rectangle Fill="#3CB371" Height="737" Width="365"/>
 
             <Line X1="10" X2="10" Y1="10" Y2="630" Stroke="Black" StrokeThickness="3" />
@@ -17,7 +18,8 @@
             <Line X1="350" X2="350" Y1="500" Y2="630" Stroke="Black" StrokeThickness="3" />
             <Line X1="10" X2="350" Y1="10" Y2="10" Stroke="Black" StrokeThickness="3" />
 
-            <Rectangle Fill="#2E86C1" Height="737" Canvas.Left="365" Width="632"/>
+            <!-- Stijger en water -->
+            <Rectangle Fill="#2E86C1" Height="737" Canvas.Left="365" Width="751"/>
             <Rectangle Fill="#8B4513" Height="84" Canvas.Left="365" Canvas.Top="408" Width="173"/>
             <Rectangle Fill="#8B4513" Height="84" Canvas.Left="391" Canvas.Top="407" Width="212" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
@@ -29,6 +31,25 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+
+            <!-- skibaan -->
+            <Line X1="700" X2="700" Y1="100" Y2="630" Stroke="Black" StrokeThickness="3" />
+            <Line X1="1000" X2="1000" Y1="100" Y2="630" Stroke="Black" StrokeThickness="3" />
+            <Line X1="700" X2="1000" Y1="100" Y2="100" Stroke="Black" StrokeThickness="3" />
+            <Line X1="700" X2="1000" Y1="630" Y2="630" Stroke="Black" StrokeThickness="3" />
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="224" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="224" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="33" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="33" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="33" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="470" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="470" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="340" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+
+       
         </Canvas>
     </Grid>
 </Window>

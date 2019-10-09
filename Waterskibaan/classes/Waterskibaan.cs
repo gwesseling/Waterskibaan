@@ -35,9 +35,12 @@ namespace Waterskibaan.classes {
             }
 
             if (this.Kabel.IsStartPositieLeeg()) {
-                Lijn lijn = this.LijnenVoorraad.VerwijderdEersteLijn();        
                 s.AantalRondesNogTeGaan = new Random().Next(1, 3);
+
+                Lijn lijn = this.LijnenVoorraad.VerwijderdEersteLijn();        
                 lijn.Sporter = s;
+                lijn.PositieOpDeKabel = 0;
+
                 this.Kabel.NeemLijnInGebruik(lijn);
             }
         }

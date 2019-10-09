@@ -7,7 +7,7 @@ using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes {
     public class Kabel {
-        private LinkedList<Lijn> _lijnen { get; set; }
+        public LinkedList<Lijn> _lijnen { get; set; }
 
         public Kabel() {
             this._lijnen = new LinkedList<Lijn>();
@@ -38,9 +38,11 @@ namespace Waterskibaan.classes {
                     }
                 }
 
-                l.PositieOpDeKabel++;
+                if (l.PositieOpDeKabel >= 0 && l.PositieOpDeKabel < 10) {
+                    l.PositieOpDeKabel++;
+                }
 
-                if (l.PositieOpDeKabel > 9) {
+                if (l.PositieOpDeKabel > 9 && l.Sporter.AantalRondesNogTeGaan > 1) {
                     l.Sporter.AantalRondesNogTeGaan--;
                     lijn = l;
                 }

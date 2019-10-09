@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="classes\args\InstructieAfgelopenArgs.cs" />
     <Compile Include="classes\args\NieuweBezoekerArgs.cs" />
+    <Compile Include="classes\args\VerplaatsKabelArgs.cs" />
     <Compile Include="classes\Game.cs" />
     <Compile Include="classes\wachtrij\InstructieGroep.cs" />
     <Compile Include="classes\Kabel.cs" />
