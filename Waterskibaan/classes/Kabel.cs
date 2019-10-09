@@ -42,7 +42,7 @@ namespace Waterskibaan.classes {
                     l.PositieOpDeKabel++;
                 }
 
-                if (l.PositieOpDeKabel > 9 && l.Sporter.AantalRondesNogTeGaan > 1) {
+                if (l.PositieOpDeKabel == 10 && l.Sporter.AantalRondesNogTeGaan > 1) {
                     l.Sporter.AantalRondesNogTeGaan--;
                     lijn = l;
                 }
@@ -57,7 +57,7 @@ namespace Waterskibaan.classes {
 
         public Lijn VerwijderLijnVanKabel() {
             foreach (Lijn lijn in this._lijnen) {
-                if (lijn.PositieOpDeKabel == 9 && lijn.Sporter.AantalRondesNogTeGaan == 1) {
+                if (lijn.PositieOpDeKabel == 10 && lijn.Sporter.AantalRondesNogTeGaan == 1) {
                     this._lijnen.Remove(lijn);
                     return lijn;
                 }

@@ -47,9 +47,6 @@
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="470" Width="22" RenderTransformOrigin="-0.886,2.159"/>
-            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="340" Width="22" RenderTransformOrigin="-0.886,2.159"/>
-
-       
         </Canvas>
     </Grid>
 </Window>
