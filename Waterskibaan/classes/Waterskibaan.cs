@@ -15,7 +15,9 @@ namespace Waterskibaan.classes {
             this.LijnenVoorraad = new LijnenVoorraad();
 
             for (int i = 0; i < 15; i++) {
-                this.LijnenVoorraad.LijnToevoegenAanRij(new Lijn());
+                this.LijnenVoorraad.LijnToevoegenAanRij(new Lijn() {
+                    Nummer = i
+                });
             }
         }
 

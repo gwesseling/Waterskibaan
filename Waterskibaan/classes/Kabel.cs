@@ -34,7 +34,11 @@ namespace Waterskibaan.classes {
 
                     if (r.Next(0, 4) == 0) {
                         IMoves m = sporter.Moves[r.Next(sporter.Moves.Count)];
-                        m.Move();
+                        int score = m.Uitvoeren();
+                        sporter.HuidigeMove = m;
+                        sporter.BehaaldePunten += score;
+                    } else {
+                        sporter.HuidigeMove = null;
                     }
                 }
 

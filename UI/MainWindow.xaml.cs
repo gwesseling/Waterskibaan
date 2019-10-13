@@ -130,8 +130,30 @@ namespace UI {
                 Line l = this.renderLine(x, y, 0, kabels[lijn.PositieOpDeKabel, 0], 0, kabels[lijn.PositieOpDeKabel, 1]);
                 Rectangle r = this.renderSporter(s, x, y);
 
+                TextBlock number = new TextBlock();
+                number.Text = "Lijn: " + lijn.Nummer.ToString();
+                number.FontWeight = FontWeights.Bold;
+
+                TextBlock move = new TextBlock();
+                move.Text = "Huidige move: ";
+                move.FontWeight = FontWeights.Bold;
+
+                Canvas.SetLeft(number, x - 10);
+                Canvas.SetTop(number, y + 25);
+                Canvas.Children.Add(number);
+
+                if (s.HuidigeMove != null) {
+                    move.Text = "Huidige move: " + s.HuidigeMove.Naam;
+                }
+
+                Canvas.SetLeft(move, x - 40);
+                Canvas.SetTop(move, y + 40);
+                Canvas.Children.Add(move);
+
                 this.sportersOpBaan.Add(r);
                 this.sportersOpBaan.Add(l);
+                this.sportersOpBaan.Add(number);
+                this.sportersOpBaan.Add(move);
             }
         }
 

@@ -19,6 +19,7 @@ namespace Waterskibaan.classes {
         public WachtrijStarten WachtrijStarten { get; set; }
 
         public Waterskibaan Waterskibaan { get; set; }
+        private Logger Logger { get; set; }
 
         public delegate void NieuwBezoekerHandler(NieuweBezoekerArgs args);
         public event NieuwBezoekerHandler NieuweBezoeker;
@@ -31,6 +32,8 @@ namespace Waterskibaan.classes {
 
         public Game() {
             this.Waterskibaan = new Waterskibaan();
+            this.Logger = new Logger(this.Waterskibaan.Kabel);
+
             this.WachtrijInstructie = new WachtrijInstructie();
             this.InstructieGroep = new InstructieGroep();
             this.WachtrijStarten = new WachtrijStarten();
@@ -40,6 +43,7 @@ namespace Waterskibaan.classes {
             this.SetupTimer();
 
             this.NieuweBezoeker += this.WachtrijInstructie.OnNieuwBezoeker;
+            this.NieuweBezoeker += this.Logger.OnNieuwBezoeker;
             this.InstructieAfgelopen += this.InstructieGroep.OnInstructieAfgelopen;
             this.InstructieAfgelopen += this.WachtrijStarten.OnInstructieAfgelopen;
         }
@@ -83,7 +87,6 @@ namespace Waterskibaan.classes {
 
         private void OnVeplaatsKabel(Object source, EventArgs e) {
             if (this.counter % 4 == 0) {
-
                 this.Waterskibaan.VerplaatsKabel();
 
                 if (this.Waterskibaan.Kabel.IsStartPositieLeeg() && this.WachtrijStarten.GetAllSporters().Count > 0) {

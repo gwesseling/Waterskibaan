@@ -7,8 +7,9 @@ using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes.moves {
     class Flip : IMoves {
+        public String Naam { get; } = "Flip";
 
-        public int Move() {
+        public int Uitvoeren() {
             return new Random().Next(0, 11) > 7 ? 10 : 0;
         }
     }
