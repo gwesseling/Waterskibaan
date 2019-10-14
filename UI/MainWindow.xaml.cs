@@ -59,6 +59,9 @@ namespace UI {
         public MainWindow() {
             InitializeComponent();
 
+            this.Height = 768;
+            this.Width = 1366;
+
             this.game = new Game();
             this.game.Initialize();
 
@@ -108,7 +111,7 @@ namespace UI {
             List<Sporter> start = this.game.WachtrijStarten.GetAllSporters();
 
             clearSporters(this.sportersInStart);
-            int y = 352;
+            int y = 192;
             int x = 495;
 
             foreach (Sporter sporter in start) {

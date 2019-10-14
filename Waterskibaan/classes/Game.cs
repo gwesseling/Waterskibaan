@@ -75,7 +75,7 @@ namespace Waterskibaan.classes {
         }
 
         private void OnInstructieAfgelopen(Object source, EventArgs e) {
-            if (this.counter % 20 == 0 && this.WachtrijStarten.GetAllSporters().Count == 0) {
+            if (this.counter % 20 == 0 && this.WachtrijStarten.GetAllSporters().Count <= WachtrijStarten.MAX_LENGTE_RIJ - 5) {
                 InstructieAfgelopenArgs args = new InstructieAfgelopenArgs() {
                     SportersKlaar = this.InstructieGroep.SportersVerlatenRij(5),
                     NieuweSporters = this.WachtrijInstructie.SportersVerlatenRij(5)

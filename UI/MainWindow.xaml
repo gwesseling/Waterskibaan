@@ -21,7 +21,7 @@
             <!-- Stijger en water -->
             <Rectangle Fill="#2E86C1" Height="737" Canvas.Left="365" Width="751"/>
             <Rectangle Fill="#8B4513" Height="84" Canvas.Left="365" Canvas.Top="408" Width="173"/>
-            <Rectangle Fill="#8B4513" Height="84" Canvas.Left="391" Canvas.Top="407" Width="212" RenderTransformOrigin="0.5,0.5">
+            <Rectangle Fill="#8B4513" Height="84" Canvas.Left="228" Canvas.Top="409" Width="538" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
