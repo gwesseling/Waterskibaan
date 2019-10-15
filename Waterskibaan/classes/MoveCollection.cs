@@ -13,13 +13,14 @@ namespace Waterskibaan.classes {
             new Jump(),
             new Flip(),
             new Roll(),
+            new Koprol(),
         };
 
         public static List<IMoves> GetWillekeurigeMoves() {
             List<IMoves> moves = new List<IMoves>();
 
             foreach (IMoves m in MoveCollection.Moves) {
-                int r = new Random().Next(0, 2);
+                int r = new Random().Next(2);
 
                 if (r == 1) {
                     moves.Add(m);

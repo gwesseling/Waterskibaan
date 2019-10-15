@@ -33,9 +33,9 @@ namespace UI {
             { 1056, 33 }, 
             { 1056, 224 }, 
             { 1056, 470},
-            { 1056, 674},
-            { 840, 674},
-            { 640, 674},
+            { 1056, 594},
+            { 840, 594},
+            { 640, 594},
         };
 
         private double[,] kabels = {
@@ -59,19 +59,25 @@ namespace UI {
         public MainWindow() {
             InitializeComponent();
 
-            this.Height = 768;
-            this.Width = 1366;
-
             this.game = new Game();
             this.game.Initialize();
 
+            this.game.Timer.Tick += this.updateStats;
             this.game.NieuweBezoeker += RenderWachtrijInstructie;
             this.game.InstructieAfgelopen += RenderInstructies;
             this.game.VeplaatsKabel += RenderWachtrijStarten;
             this.game.VeplaatsKabel += RenderSportersOpBaan;
         }
 
+        public void updateStats(Object source, EventArgs e) {
+            LijnVoorraad.Text = "Lijnen in voorraad: " + this.game.Waterskibaan.LijnenVoorraad.GetAantalLijnen();
+        } 
+
         public void RenderWachtrijInstructie(NieuweBezoekerArgs args) {
+            this.RenderWachtrijInstructie();
+        }
+
+        public void RenderWachtrijInstructie() {
             List<Sporter> wachtrijInstructie = this.game.WachtrijInstructie.GetAllSporters();
 
             clearSporters(this.sportersInWachtrij);
@@ -89,7 +95,6 @@ namespace UI {
                     x -= 30;
                 }
             }
-            
         }
 
         public void RenderInstructies(InstructieAfgelopenArgs args) {
@@ -104,7 +109,9 @@ namespace UI {
                 this.sportersInInstructie.Add(r);
 
                 x -= 30;
-            }  
+            }
+
+            this.RenderWachtrijInstructie();
         }
 
         public void RenderWachtrijStarten(VerplaatsKabelArgs args) {      

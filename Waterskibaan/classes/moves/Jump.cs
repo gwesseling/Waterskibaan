@@ -10,7 +10,7 @@ namespace Waterskibaan.classes.moves {
         public String Naam { get; } = "Jump";
 
         public int Uitvoeren() {
-            return new Random().Next(0, 11) > 2 ? 2 : 0;
+            return new Random().Next(0, 11) > 1 ? 2 : 0;
         }
     }
 }

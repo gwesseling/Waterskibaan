@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes.moves {
-    class Roll: IMoves {
-        public String Naam { get; } = "Roll";
+    class Koprol : IMoves {
+        public string Naam { get; } = "Koprol";
 
         public int Uitvoeren() {
-            return new Random().Next(0, 11) > 3 ? 5 : 0;
+            return new Random().Next(0, 11) > 4 ? 8 : 0;
         }
-
     }
 }

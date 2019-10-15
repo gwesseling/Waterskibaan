@@ -33,20 +33,21 @@
             </Rectangle>
 
             <!-- skibaan -->
-            <Line X1="700" X2="700" Y1="100" Y2="630" Stroke="Black" StrokeThickness="3" />
-            <Line X1="1000" X2="1000" Y1="100" Y2="630" Stroke="Black" StrokeThickness="3" />
+            <Line X1="700" X2="700" Y1="100" Y2="550" Stroke="Black" StrokeThickness="3" />
+            <Line X1="1000" X2="1000" Y1="100" Y2="550" Stroke="Black" StrokeThickness="3" />
             <Line X1="700" X2="1000" Y1="100" Y2="100" Stroke="Black" StrokeThickness="3" />
-            <Line X1="700" X2="1000" Y1="630" Y2="630" Stroke="Black" StrokeThickness="3" />
+            <Line X1="700" X2="1000" Y1="550" Y2="550" Stroke="Black" StrokeThickness="3" />
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="224" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="224" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="33" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="33" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="33" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="470" Width="22" RenderTransformOrigin="-0.886,2.159"/>
-            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
-            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
-            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="674" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="1056" Canvas.Top="594" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="840" Canvas.Top="594" Width="22" RenderTransformOrigin="-0.886,2.159"/>
+            <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="594" Width="22" RenderTransformOrigin="-0.886,2.159"/>
             <Rectangle Fill="#8B4513" Height="22" Canvas.Left="640" Canvas.Top="470" Width="22" RenderTransformOrigin="-0.886,2.159"/>
         </Canvas>
+        <TextBlock x:Name="LijnVoorraad" HorizontalAlignment="Left" Margin="1122,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
     </Grid>
 </Window>

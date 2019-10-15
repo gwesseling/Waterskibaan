@@ -28,6 +28,7 @@ namespace Waterskibaan.classes {
 
             foreach (Lijn l in this._lijnen) {
                 Sporter sporter = l.Sporter;
+                sporter.HuidigeMove = null;
 
                 if (sporter.Moves.Count > 0) {
                     Random r = new Random();
@@ -37,8 +38,12 @@ namespace Waterskibaan.classes {
                         int score = m.Uitvoeren();
                         sporter.HuidigeMove = m;
                         sporter.BehaaldePunten += score;
-                    } else {
-                        sporter.HuidigeMove = null;
+
+                        Console.WriteLine("Move: " + m.Naam);
+                        Console.WriteLine("Moves");
+                        foreach (IMoves mv in sporter.Moves) {
+                            Console.WriteLine(mv.Naam);
+                        }
                     }
                 }
 
