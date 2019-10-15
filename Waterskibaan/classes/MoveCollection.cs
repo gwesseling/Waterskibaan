@@ -18,11 +18,12 @@ namespace Waterskibaan.classes {
 
         public static List<IMoves> GetWillekeurigeMoves() {
             List<IMoves> moves = new List<IMoves>();
+            Random r = new Random();
 
             foreach (IMoves m in MoveCollection.Moves) {
-                int r = new Random().Next(2);
+                int mc = r.Next(2);
 
-                if (r == 1) {
+                if (mc == 0) {
                     moves.Add(m);
                 }
             }

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Waterskibaan.interfaces;
 
 namespace Waterskibaan.classes {
     public class Sporter {
+        public int AantalRondes { get; set; } = 0;
         public int AantalRondesNogTeGaan { get; set; } = 0;
         public Zwemvest Zwemvest { get; set; }
         public Skies Skies { get; set; }

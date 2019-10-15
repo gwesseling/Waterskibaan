@@ -25,25 +25,21 @@ namespace Waterskibaan.classes {
 
         public void VerschuifLijnen() {
             Lijn lijn = null;
+            Random r = new Random();
 
             foreach (Lijn l in this._lijnen) {
                 Sporter sporter = l.Sporter;
                 sporter.HuidigeMove = null;
 
                 if (sporter.Moves.Count > 0) {
-                    Random r = new Random();
-
-                    if (r.Next(0, 4) == 0) {
-                        IMoves m = sporter.Moves[r.Next(sporter.Moves.Count)];
+                    int c = r.Next(4);
+   
+                    if (c == 0) {
+                        int mv = r.Next(sporter.Moves.Count);
+                        IMoves m = sporter.Moves[mv];
                         int score = m.Uitvoeren();
                         sporter.HuidigeMove = m;
                         sporter.BehaaldePunten += score;
-
-                        Console.WriteLine("Move: " + m.Naam);
-                        Console.WriteLine("Moves");
-                        foreach (IMoves mv in sporter.Moves) {
-                            Console.WriteLine(mv.Naam);
-                        }
                     }
                 }
 
@@ -51,8 +47,9 @@ namespace Waterskibaan.classes {
                     l.PositieOpDeKabel++;
                 }
 
-                if (l.PositieOpDeKabel == 10 && l.Sporter.AantalRondesNogTeGaan > 1) {
-                    l.Sporter.AantalRondesNogTeGaan--;
+                if (l.PositieOpDeKabel == 10 && sporter.AantalRondesNogTeGaan > 1) {
+                    sporter.AantalRondesNogTeGaan--;
+                    sporter.AantalRondes++;
                     lijn = l;
                 }
             }
@@ -67,6 +64,7 @@ namespace Waterskibaan.classes {
         public Lijn VerwijderLijnVanKabel() {
             foreach (Lijn lijn in this._lijnen) {
                 if (lijn.PositieOpDeKabel == 10 && lijn.Sporter.AantalRondesNogTeGaan == 1) {
+                    lijn.Sporter.AantalRondes++;
                     this._lijnen.Remove(lijn);
                     return lijn;
                 }

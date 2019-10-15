@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Waterskibaan.classes;
 using Waterskibaan.classes.args;
+using Waterskibaan.interfaces;
 
 namespace UI {
     /// <summary>
@@ -55,6 +56,8 @@ namespace UI {
         private List<UIElement> sportersInInstructie = new List<UIElement>();
         private List<UIElement> sportersInStart = new List<UIElement>();
         private List<UIElement> sportersOpBaan = new List<UIElement>();
+        private List<UIElement> lichtsteKleuren = new List<UIElement>();
+        private List<UIElement> uniekeMoves = new List<UIElement>();
 
         public MainWindow() {
             InitializeComponent();
@@ -70,8 +73,48 @@ namespace UI {
         }
 
         public void updateStats(Object source, EventArgs e) {
+            clearElements(this.lichtsteKleuren);
+            clearElements(this.uniekeMoves);
+
             LijnVoorraad.Text = "Lijnen in voorraad: " + this.game.Waterskibaan.LijnenVoorraad.GetAantalLijnen();
-        } 
+            Bezoekers.Text = "Totaal aantal bezoekers: " + this.game.Logger.AantalBezoekers();
+            Score.Text = "Hoogste score: " + this.game.Logger.HoogsteScore();
+            Rood.Text = "Aantal bezoekers met rode kleding: " + this.game.Logger.AantalSportersMetRodeKleding();
+            Rondjes.Text = "Totaal aantal rondjes: " + this.game.Logger.TotaalRondjes();
+
+            int x = 1122;
+            int y = 179;
+
+            List<System.Drawing.Color> kleuren = this.game.Logger.LichtsteKleuren();
+            for (int i = 0; i < kleuren.Count(); i++) {
+                Rectangle r = this.renderSporter(kleuren[i], x, y);
+                this.lichtsteKleuren.Add(r);
+                x += 30;
+
+                if (i == 4) {
+                    y = 209;
+                    x = 1122;
+                }
+            }
+
+            x = 1122;
+            y = 311;
+
+            List<IMoves> moves = this.game.Logger.Moves();
+
+            for (int i = 0; i < moves.Count(); i++) {
+                TextBlock tb = new TextBlock();
+                tb.Text = (i + 1) + ". " + moves[i].Naam;
+
+                Canvas.SetLeft(tb, x);
+                Canvas.SetTop(tb, y);
+                Canvas.Children.Add(tb);
+
+                this.uniekeMoves.Add(tb);
+
+                y += 30;
+            }
+        }
 
         public void RenderWachtrijInstructie(NieuweBezoekerArgs args) {
             this.RenderWachtrijInstructie();
@@ -80,12 +123,12 @@ namespace UI {
         public void RenderWachtrijInstructie() {
             List<Sporter> wachtrijInstructie = this.game.WachtrijInstructie.GetAllSporters();
 
-            clearSporters(this.sportersInWachtrij);
+            clearElements(this.sportersInWachtrij);
             int y = 370;
             int x = 315;
 
-            foreach (Sporter sporter in wachtrijInstructie) {
-                Rectangle r = this.renderSporter(sporter, x, y);
+            foreach (Sporter s in wachtrijInstructie) {
+                Rectangle r = this.renderSporter(s.KledingKleur, x, y);
                 this.sportersInWachtrij.Add(r);
 
                 y -= 30;
@@ -100,12 +143,12 @@ namespace UI {
         public void RenderInstructies(InstructieAfgelopenArgs args) {
             List<Sporter> instructie = args.NieuweSporters;
 
-            clearSporters(this.sportersInInstructie);
+            clearElements(this.sportersInInstructie);
             int y = 464;
             int x = 224;
 
-            foreach (Sporter sporter in instructie) {
-                Rectangle r = this.renderSporter(sporter, x, y);
+            foreach (Sporter s in instructie) {
+                Rectangle r = this.renderSporter(s.KledingKleur, x, y);
                 this.sportersInInstructie.Add(r);
 
                 x -= 30;
@@ -117,12 +160,12 @@ namespace UI {
         public void RenderWachtrijStarten(VerplaatsKabelArgs args) {      
             List<Sporter> start = this.game.WachtrijStarten.GetAllSporters();
 
-            clearSporters(this.sportersInStart);
+            clearElements(this.sportersInStart);
             int y = 192;
             int x = 495;
 
-            foreach (Sporter sporter in start) {
-                Rectangle r = this.renderSporter(sporter, x, y);
+            foreach (Sporter s in start) {
+                Rectangle r = this.renderSporter(s.KledingKleur, x, y);
                 this.sportersInStart.Add(r);
 
                 y += 30;
@@ -130,15 +173,16 @@ namespace UI {
         }
 
         public void RenderSportersOpBaan(VerplaatsKabelArgs args) {
-            clearSporters(this.sportersOpBaan);
+            clearElements(this.sportersOpBaan);
 
             foreach (Lijn lijn in args.Lijnen) {
                 Sporter s = lijn.Sporter;
+
                 int x = locaties[lijn.PositieOpDeKabel, 0];
                 int y = locaties[lijn.PositieOpDeKabel, 1];
 
                 Line l = this.renderLine(x, y, 0, kabels[lijn.PositieOpDeKabel, 0], 0, kabels[lijn.PositieOpDeKabel, 1]);
-                Rectangle r = this.renderSporter(s, x, y);
+                Rectangle r = this.renderSporter(s.KledingKleur, x, y);
 
                 TextBlock number = new TextBlock();
                 number.Text = "Lijn: " + lijn.Nummer.ToString();
@@ -167,10 +211,10 @@ namespace UI {
             }
         }
 
-        public void clearSporters(List<UIElement> rectangles) {
-            foreach (UIElement r in rectangles) {
-                if (Canvas.Children.Contains(r)) {
-                    Canvas.Children.Remove(r);
+        public void clearElements(List<UIElement> elements) {
+            foreach (UIElement e in elements) {
+                if (Canvas.Children.Contains(e)) {
+                    Canvas.Children.Remove(e);
                 }
             }
         }
@@ -191,9 +235,9 @@ namespace UI {
             return l;
         }
 
-        public Rectangle renderSporter(Sporter sporter, int x, int y) {
+        public Rectangle renderSporter(System.Drawing.Color color, int x, int y) {
             Rectangle r = new Rectangle();
-            r.Fill = new SolidColorBrush(Color.FromRgb(sporter.KledingKleur.R, sporter.KledingKleur.G, sporter.KledingKleur.B));
+            r.Fill = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
             r.Height = 25;
             r.Width = 25;
             r.Stroke = new SolidColorBrush(Colors.Black);

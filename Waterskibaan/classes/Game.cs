@@ -19,7 +19,7 @@ namespace Waterskibaan.classes {
         public WachtrijStarten WachtrijStarten { get; set; }
 
         public Waterskibaan Waterskibaan { get; set; }
-        private Logger Logger { get; set; }
+        public Logger Logger { get; set; }
 
         public delegate void NieuwBezoekerHandler(NieuweBezoekerArgs args);
         public event NieuwBezoekerHandler NieuweBezoeker;
@@ -102,7 +102,6 @@ namespace Waterskibaan.classes {
                 };
 
                 this.VeplaatsKabel(args);
-                Console.WriteLine("Kabel volgorde: " + this.Waterskibaan.Kabel);
             }
         }
     }
